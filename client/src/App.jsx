@@ -1,4 +1,5 @@
 import Particles from "./components/reactbits/particles/Particles";
+import HoloCard from "./components/reactbits/holocard/HoloCard";
 
 function App() {
   return (
@@ -7,7 +8,7 @@ function App() {
         <Particles
           particleColors={["#f8f6a9", "#ffffff", "#ffffff"]}
           particleCount={200}
-          particleSpread={5}
+          particleSpread={10}
           speed={0.02}
           particleBaseSize={100}
           glow={0.5}
@@ -15,8 +16,8 @@ function App() {
           moveParticlesOnHover
           hoverEffect="parallax"
           sizeRandomness={1}
-          shape="square"
-          depthOfField={0.2}
+          shape="ring"
+          depthOfField={0}
           connections={false}
           connectionDistance={110}
           particleHoverFactor={0.1}
@@ -28,11 +29,17 @@ function App() {
           cameraDistance={20}
           variation={0}
           opacity={1}
-          clickBurst={false}
+          clickBurst={true}
           intro
           lightMode={false}
         />
       </div>
+      <HoloCard
+        image="https://assets.tcgdex.net/en/xy/xy12/100/high.png"
+        alt="M Venusaaur EX"
+        preset="rainbow"
+        width={320}
+      />
       <div className="hero">
         <h1>Pokepository</h1>
         <p>Hi</p>
