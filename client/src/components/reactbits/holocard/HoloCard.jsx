@@ -323,7 +323,7 @@ export default function HoloCard({
   scale = 1,
   edgeSparkle = 0.8,
   frame = 4,
-  glare = 0.5,
+  glare = 0.15,
   foilColor = "#e2e6ec",
   width = 320,
   radius = 14,

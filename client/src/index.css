@@ -1,3 +1,15 @@
+:root {
+  --bs-body-font-family: "Pokepository Display", system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: "Pokepository Display";
+  src: url("/fonts/Gill Sans Condensed Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   background-color: #04090f;
 }
@@ -6,6 +18,9 @@ body {
   background: transparent;
 }
 
+p {
+  font-family: system-ui;
+}
 .site-background {
   position: fixed;
   inset: 0;
@@ -14,6 +29,22 @@ body {
 
 h1 {
   color: #dfdfdf;
+  animation: title-in 900ms ease-out both;
+  font-family: "Pokepository Display";
+}
+
+@keyframes title-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes title-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
 }
 
 body {
@@ -21,11 +52,139 @@ body {
   color: #e8eef6;
 }
 
+.hero-scroll {
+  height: 250vh;
+  view-timeline-name: --hero;
+}
+
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
   text-align: center;
+  --split-x: clamp(0rem, 18vw, 14rem);
+  --split-y: 0rem;
+}
+
+.hero__text,
+.hero__card {
+  grid-area: 1 / 1;
+}
+.hero__text {
+  max-width: 28rem;
+}
+
+.hero__lines {
+  display: grid;
+}
+.hero__lines > .hero__line {
+  grid-area: 1 / 1;
+  margin: 0;
+}
+.hero__line--a {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .hero {
+    --split-x: 0rem;
+    --split-y: 9rem;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .hero__line--a {
+    display: block;
+  }
+
+  .hero__card {
+    opacity: 0;
+    translate: var(--split-x) var(--split-y);
+  }
+
+  .hero__text,
+  .hero__card,
+  .hero__line {
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: --hero;
+  }
+
+  .hero__text {
+    animation-name: hero-shift;
+    animation-range: contain 25% contain 60%;
+  }
+  .hero__card {
+    animation-name: hero-reveal;
+    animation-range: contain 30% contain 65%;
+  }
+  .hero__line--a {
+    animation-name: hero-line-a;
+    animation-range: contain 5% contain 55%;
+  }
+  .hero__line--b {
+    animation-name: hero-in;
+    animation-range: contain 50% contain 70%;
+  }
+}
+
+@keyframes hero-shift {
+  to {
+    translate: calc(-1 * var(--split-x)) calc(-1 * var(--split-y));
+  }
+}
+@keyframes hero-reveal {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes hero-line-a {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes hero-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll {
+    height: auto;
+  }
+  .hero {
+    position: static;
+    height: auto;
+    min-height: 100vh;
+  }
+  h1,
+  .hero__text,
+  .hero__card,
+  .hero__line {
+    animation: none;
+  }
+  .hero__line--a {
+    display: none;
+  }
 }

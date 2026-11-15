@@ -34,15 +34,26 @@ function App() {
           lightMode={false}
         />
       </div>
-      <HoloCard
-        image="https://assets.tcgdex.net/en/xy/xy12/100/high.png"
-        alt="M Venusaaur EX"
-        preset="rainbow"
-        width={320}
-      />
-      <div className="hero">
-        <h1>Pokepository</h1>
-        <p>Hi</p>
+      <div className="hero-scroll">
+        <section className="hero">
+          <div className="hero__text">
+            <h1>Poképository</h1>
+            <div className="hero__lines">
+              <p className="hero__line hero__line--a">Hi</p>
+              <p className="hero__line hero__line--b">
+                Every card you own, now in one place :D
+              </p>
+            </div>
+          </div>
+          <div className="hero__card">
+            <HoloCard
+              image="https://assets.tcgdex.net/en/xy/xy12/100/high.png"
+              alt="M Venusaur EX"
+              preset="gold"
+              width={320}
+            />
+          </div>
+        </section>
       </div>
     </>
   );
