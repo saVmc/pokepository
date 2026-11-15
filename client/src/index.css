@@ -84,7 +84,8 @@ body {
   grid-area: 1 / 1;
   margin: 0;
 }
-.hero__line--a {
+.hero__line--a,
+.hero__line--b {
   display: none;
 }
 
@@ -96,7 +97,8 @@ body {
 }
 
 @supports (animation-timeline: view()) {
-  .hero__line--a {
+  .hero__line--a,
+  .hero__line--b {
     display: block;
   }
 
@@ -122,12 +124,16 @@ body {
     animation-range: contain 30% contain 65%;
   }
   .hero__line--a {
-    animation-name: hero-line-a;
-    animation-range: contain 5% contain 55%;
+    animation-name: hero-line-cycle;
+    animation-range: contain 5% contain 38%;
   }
   .hero__line--b {
+    animation-name: hero-line-cycle;
+    animation-range: contain 36% contain 68%;
+  }
+  .hero__line--c {
     animation-name: hero-in;
-    animation-range: contain 50% contain 70%;
+    animation-range: contain 66% contain 80%;
   }
 }
 
@@ -146,7 +152,7 @@ body {
     scale: 1;
   }
 }
-@keyframes hero-line-a {
+@keyframes hero-line-cycle {
   0% {
     opacity: 0;
   }
