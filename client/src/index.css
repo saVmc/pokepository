@@ -1,5 +1,5 @@
 html {
-  background-color: #0f2034;
+  background-color: #04090f;
 }
 
 body {
@@ -10,4 +10,22 @@ body {
   position: fixed;
   inset: 0;
   z-index: -1;
+}
+
+h1 {
+  color: #dfdfdf;
+}
+
+body {
+  background: transparent;
+  color: #e8eef6;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

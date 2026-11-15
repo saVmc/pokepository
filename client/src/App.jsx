@@ -33,7 +33,7 @@ function App() {
           lightMode={false}
         />
       </div>
-      <div>
+      <div className="hero">
         <h1>Pokepository</h1>
         <p>Hi</p>
       </div>
