@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import Particles from "./components/reactbits/particles/Particles";
-import HoloCard from "./components/reactbits/holocard/HoloCard";
 import StrokeText from "./components/reactbits/stroketext/StrokeText";
 import IridescentLogo from "./components/reactbits/holologo/IridescentLogo";
 import IridescentText from "./components/reactbits/iridescence/IridescentText";
+import CircularCarousel from "./components/reactbits/carousel/CircularCarousel";
+import SpecularButton from "./components/reactbits/specularbutton/SpecularButton";
 
 const DRAW = 1.4;
 const TITLE_FONT_SIZE = 96;
@@ -12,6 +13,62 @@ const FILL_DELAY = 0.2;
 const FILL = Math.max(0.4, DRAW * 0.5);
 const TITLE_MS = (DRAW + FILL_DELAY + FILL) * 1000;
 const INTRO_MS = 1000;
+
+const CARD_ASPECT = 63 / 88;
+
+const tcgdex = (set, number, lang = "en") =>
+  `https://assets.tcgdex.net/${lang}/${set}/${number}/high.png`;
+
+const SHOWCASE_CARDS = [
+  {
+    src: tcgdex("me/me04", "088"),
+    alt: "Froakie",
+    title: "Froakie",
+    subtitle: "Chaos Rising",
+  },
+  {
+    src: tcgdex("sv/sv03.5", "166"),
+    alt: "Bulbasaur",
+    title: "Bulbasaur",
+    subtitle: "151",
+  },
+  {
+    src: tcgdex("xy/xy12", "100"),
+    alt: "M Venusaur EX",
+    title: "M Venusaur EX",
+    subtitle: "Evolutions",
+  },
+  {
+    src: tcgdex("swsh/swsh7", "215"),
+    alt: "Umbreon VMAX",
+    title: "Umbreon VMAX",
+    subtitle: "Evolving Skies",
+  },
+  {
+    src: tcgdex("sv/sv04.5", "233"),
+    alt: "Gardevoir",
+    title: "Gardevoir",
+    subtitle: "Paldean Fates",
+  },
+  {
+    src: tcgdex("SV/SV8", "033", "jp"),
+    alt: "Pikachu ex",
+    title: "Pikachu ex",
+    subtitle: "Vivid Voltage",
+  },
+  {
+    src: tcgdex("ex/ex3", "97"),
+    alt: "Rayquaza ex",
+    title: "Rayquaza ex",
+    subtitle: "Dragon",
+  },
+  {
+    src: tcgdex("sm/sm12", "241"),
+    alt: "Pikachu",
+    title: "Pikachu",
+    subtitle: "Cosmic Eclipse",
+  },
+];
 const STARS_MS = Math.max(0, TITLE_MS - INTRO_MS);
 
 function App() {
@@ -61,7 +118,7 @@ function App() {
             cameraDistance={20}
             variation={0}
             opacity={1}
-            clickBurst={true}
+            clickBurst={false}
             intro
             lightMode={false}
           />
@@ -114,13 +171,43 @@ function App() {
               </p>
               <p className="hero__line hero__line--c">Coming soon...</p>
             </div>
+            <div className="hero__cta">
+              <SpecularButton
+                size="lg"
+                radius={18}
+                tint="#14e6dd"
+                tintOpacity={0.06}
+                textColor="#f5f5f5"
+                lineColor="#14e6dd"
+                baseColor="#2a3a4a"
+                proximity={260}
+              >
+                Get Started
+              </SpecularButton>
+            </div>
           </div>
           <div className="hero__card">
-            <HoloCard
-              image="https://assets.tcgdex.net/en/me/me05/094/high.png"
-              alt="M Venusaur EX"
-              preset="rainbow"
-              width={320}
+            <CircularCarousel
+              items={SHOWCASE_CARDS}
+              preset="cylinder"
+              intro="spin"
+              cardWidth={230}
+              aspectRatio={CARD_ASPECT}
+              curve={0}
+              gap={78}
+              autoplay="step"
+              interval={2.5}
+              speed={10}
+              tilt={-8}
+              perspective={3200}
+              momentum={0.42}
+              parallax={0.34}
+              stretch={0.38}
+              frontScale={0.62}
+              frontFalloff={40}
+              cornerRadius={12}
+              fadeColor="#04090f"
+              captions
             />
           </div>
         </section>

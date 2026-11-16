@@ -65,7 +65,7 @@ body {
   place-items: center;
   padding: clamp(1rem, 4vw, 3rem);
   text-align: center;
-  --split-x: clamp(0rem, 18vw, 14rem);
+  --split-x: clamp(0rem, 23vw, 18rem);
   --split-y: 0rem;
 }
 
@@ -103,15 +103,24 @@ body {
   opacity: 0;
 }
 
-/* Both title layers are SVG text at the same size, so they align by
-   construction. The old calibration for HTML text is no longer needed. */
-
 .hero__text,
 .hero__card {
   grid-area: 1 / 1;
 }
 .hero__text {
-  max-width: 28rem;
+  max-width: 24rem;
+}
+
+.hero__card {
+  position: relative;
+  width: min(100%, 36rem);
+  height: clamp(22rem, 76vh, 38rem);
+}
+
+.hero__cta {
+  margin-top: clamp(3rem, 7vh, 5.5rem);
+  display: flex;
+  justify-content: center;
 }
 
 .hero__lines {
@@ -126,7 +135,7 @@ body {
   display: none;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
   .hero {
     --split-x: 0rem;
     --split-y: 9rem;
@@ -146,7 +155,8 @@ body {
 
   .hero__text,
   .hero__card,
-  .hero__line {
+  .hero__line,
+  .hero__cta {
     animation-timing-function: linear;
     animation-fill-mode: both;
     animation-timeline: --hero;
@@ -169,6 +179,10 @@ body {
     animation-range: contain 36% contain 68%;
   }
   .hero__line--c {
+    animation-name: hero-in;
+    animation-range: contain 66% contain 80%;
+  }
+  .hero__cta {
     animation-name: hero-in;
     animation-range: contain 66% contain 80%;
   }
@@ -224,10 +238,12 @@ body {
   h1,
   .hero__text,
   .hero__card,
-  .hero__line {
+  .hero__line,
+  .hero__cta {
     animation: none;
   }
-  .hero__line--a {
+  .hero__line--a,
+  .hero__line--b {
     display: none;
   }
 }
