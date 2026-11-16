@@ -87,6 +87,30 @@ body {
   min-width: 0;
 }
 
+.hero__swap {
+  display: grid;
+  position: relative;
+}
+
+.hero__swap-layer {
+  grid-area: 1 / 1;
+  display: grid;
+  place-items: center;
+  transition: opacity 400ms ease;
+}
+
+.hero__swap-layer.is-out {
+  opacity: 0;
+}
+
+.hero__swap-layer .gradient-text {
+  font-size: clamp(2rem, 8vw, 5rem);
+  line-height: 1;
+  white-space: nowrap;
+  letter-spacing: -0.0182em;
+  padding-inline: 0.1267em;
+}
+
 .hero__text,
 .hero__card {
   grid-area: 1 / 1;

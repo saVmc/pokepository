@@ -3,8 +3,11 @@ import Particles from "./components/reactbits/particles/Particles";
 import HoloCard from "./components/reactbits/holocard/HoloCard";
 import StrokeText from "./components/reactbits/stroketext/StrokeText";
 import HoloLogo from "./components/reactbits/holologo/HoloLogo";
+import GradientText from "./components/reactbits/gradienttext/GradientText";
 
 const DRAW = 1.4;
+const TITLE_FONT_SIZE = 96;
+const TITLE_LETTER_SPACING = -2;
 const FILL_DELAY = 0.2;
 const FILL = Math.max(0.4, DRAW * 0.5);
 const TITLE_MS = (DRAW + FILL_DELAY + FILL) * 1000;
@@ -13,15 +16,20 @@ const STARS_MS = Math.max(0, TITLE_MS - INTRO_MS);
 
 function App() {
   const [showStars, setShowStars] = useState(false);
-
+  const [titleFilled, setTitleFilled] = useState(false);
   useEffect(() => {
-    let timer;
+    let starsTimer;
+    let titleTimer;
     const start = () => {
-      timer = setTimeout(() => setShowStars(true), STARS_MS);
+      starsTimer = setTimeout(() => setShowStars(true), STARS_MS);
+      titleTimer = setTimeout(() => setTitleFilled(true), TITLE_MS);
     };
     if (document.fonts) document.fonts.ready.then(start);
     else start();
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(starsTimer);
+      clearTimeout(titleTimer);
+    };
   }, []);
 
   return (
@@ -65,18 +73,44 @@ function App() {
               <div className="hero__logo">
                 <HoloLogo />
               </div>
-              <h1 className="hero__title">
-                <StrokeText
-                  text="Poképository"
-                  strokeColor="#e6f3ab"
-                  fillColor="currentColor"
-                  fontSize={96}
-                  strokeWidth={1.2}
-                  letterSpacing={-2}
-                  drawDuration={DRAW}
-                  fillDelay={FILL_DELAY}
-                  trigger="mount"
-                />
+              <h1 className="hero__title" aria-label="Poképository">
+                <span className="hero__swap">
+                  <span
+                    className={`hero__swap-layer${titleFilled ? " is-out" : ""}`}
+                    aria-hidden="true"
+                  >
+                    <StrokeText
+                      text="Poképository"
+                      strokeColor="#e6f3ab"
+                      fillColor="currentColor"
+                      fontSize={TITLE_FONT_SIZE}
+                      strokeWidth={1.2}
+                      letterSpacing={TITLE_LETTER_SPACING}
+                      drawDuration={DRAW}
+                      fillDelay={FILL_DELAY}
+                      trigger="mount"
+                    />
+                  </span>
+                  <span
+                    className={`hero__swap-layer${titleFilled ? "" : " is-out"}`}
+                    aria-hidden="true"
+                  >
+                    <GradientText
+                      colors={[
+                        "#00f7ff",
+                        "#ff0c8e",
+                        "#f8f6a9",
+                        "#32ffa3",
+                        "#ffffff",
+                      ]}
+                      animationSpeed={8}
+                      variant="flow"
+                      glow={0.4}
+                    >
+                      Poképository
+                    </GradientText>
+                  </span>
+                </span>
               </h1>
             </div>
             <div className="hero__lines">
