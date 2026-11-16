@@ -103,13 +103,8 @@ body {
   opacity: 0;
 }
 
-.hero__swap-layer .gradient-text {
-  font-size: clamp(2rem, 8vw, 5rem);
-  line-height: 1;
-  white-space: nowrap;
-  letter-spacing: -0.0182em;
-  padding-inline: 0.1267em;
-}
+/* Both title layers are SVG text at the same size, so they align by
+   construction. The old calibration for HTML text is no longer needed. */
 
 .hero__text,
 .hero__card {

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Particles from "./components/reactbits/particles/Particles";
 import HoloCard from "./components/reactbits/holocard/HoloCard";
 import StrokeText from "./components/reactbits/stroketext/StrokeText";
-import HoloLogo from "./components/reactbits/holologo/HoloLogo";
-import GradientText from "./components/reactbits/gradienttext/GradientText";
+import IridescentLogo from "./components/reactbits/holologo/IridescentLogo";
+import IridescentText from "./components/reactbits/iridescence/IridescentText";
 
 const DRAW = 1.4;
 const TITLE_FONT_SIZE = 96;
@@ -34,6 +34,7 @@ function App() {
 
   return (
     <>
+      <favicon rel="icon" href="/favicon.ico" />
       <div className="site-background">
         {showStars && (
           <Particles
@@ -47,7 +48,7 @@ function App() {
             moveParticlesOnHover
             hoverEffect="parallax"
             sizeRandomness={1}
-            shape="square"
+            shape="circle"
             depthOfField={0}
             connections={false}
             connectionDistance={110}
@@ -71,7 +72,7 @@ function App() {
           <div className="hero__text">
             <div className="hero__brand">
               <div className="hero__logo">
-                <HoloLogo />
+                <IridescentLogo />
               </div>
               <h1 className="hero__title" aria-label="Poképository">
                 <span className="hero__swap">
@@ -81,7 +82,7 @@ function App() {
                   >
                     <StrokeText
                       text="Poképository"
-                      strokeColor="#e6f3ab"
+                      strokeColor="#a35ecf"
                       fillColor="currentColor"
                       fontSize={TITLE_FONT_SIZE}
                       strokeWidth={1.2}
@@ -95,20 +96,13 @@ function App() {
                     className={`hero__swap-layer${titleFilled ? "" : " is-out"}`}
                     aria-hidden="true"
                   >
-                    <GradientText
-                      colors={[
-                        "#00f7ff",
-                        "#ff0c8e",
-                        "#f8f6a9",
-                        "#32ffa3",
-                        "#ffffff",
-                      ]}
-                      animationSpeed={8}
-                      variant="flow"
-                      glow={0.4}
-                    >
-                      Poképository
-                    </GradientText>
+                    <IridescentText
+                      text="Poképository"
+                      fontSize={TITLE_FONT_SIZE}
+                      letterSpacing={TITLE_LETTER_SPACING}
+                      color="#8b769f"
+                      speed={0.5}
+                    />
                   </span>
                 </span>
               </h1>
@@ -123,9 +117,9 @@ function App() {
           </div>
           <div className="hero__card">
             <HoloCard
-              image="https://assets.tcgdex.net/en/xy/xy12/100/high.png"
+              image="https://assets.tcgdex.net/en/me/me05/094/high.png"
               alt="M Venusaur EX"
-              preset="gold"
+              preset="rainbow"
               width={320}
             />
           </div>

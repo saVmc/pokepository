@@ -1,0 +1,27 @@
+.iridescent-text {
+  display: block;
+  width: 100%;
+  line-height: 0;
+}
+
+.iridescent-text__svg {
+  display: block;
+  width: 100%;
+  max-width: var(--it-w, 600px);
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.iridescent-text__measure {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.iridescent-text__fill {
+  width: 100%;
+  height: 100%;
+}
