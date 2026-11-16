@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Particles from "./components/reactbits/particles/Particles";
 import HoloCard from "./components/reactbits/holocard/HoloCard";
 import StrokeText from "./components/reactbits/stroketext/StrokeText";
+import HoloLogo from "./components/reactbits/holologo/HoloLogo";
 
 const DRAW = 1.4;
 const FILL_DELAY = 0.2;
@@ -60,19 +61,24 @@ function App() {
       <div className="hero-scroll">
         <section className="hero">
           <div className="hero__text">
-            <h1 className="hero__title">
-              <StrokeText
-                text="Poképository"
-                strokeColor="#e6f3ab"
-                fillColor="currentColor"
-                fontSize={96}
-                strokeWidth={1.2}
-                letterSpacing={-2}
-                drawDuration={DRAW}
-                fillDelay={FILL_DELAY}
-                trigger="mount"
-              />
-            </h1>
+            <div className="hero__brand">
+              <div className="hero__logo">
+                <HoloLogo />
+              </div>
+              <h1 className="hero__title">
+                <StrokeText
+                  text="Poképository"
+                  strokeColor="#e6f3ab"
+                  fillColor="currentColor"
+                  fontSize={96}
+                  strokeWidth={1.2}
+                  letterSpacing={-2}
+                  drawDuration={DRAW}
+                  fillDelay={FILL_DELAY}
+                  trigger="mount"
+                />
+              </h1>
+            </div>
             <div className="hero__lines">
               <p className="hero__line hero__line--a">Hi</p>
               <p className="hero__line hero__line--b">

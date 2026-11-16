@@ -69,6 +69,24 @@ body {
   --split-y: 0rem;
 }
 
+.hero__brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.hero__logo {
+  flex: 0 0 auto;
+  width: clamp(3.5rem, 9vw, 7rem);
+  animation: title-in 900ms ease-out both;
+}
+
+.hero__title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .hero__text,
 .hero__card {
   grid-area: 1 / 1;
