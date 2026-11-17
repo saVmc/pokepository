@@ -53,6 +53,7 @@ body {
 }
 
 .hero-scroll {
+  position: relative;
   height: 250vh;
   view-timeline-name: --hero;
 }
@@ -73,13 +74,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(0.5rem, 2vw, 1.25rem);
-}
-
-.hero__logo {
-  flex: 0 0 auto;
-  width: clamp(3.5rem, 9vw, 7rem);
-  animation: title-in 900ms ease-out both;
 }
 
 .hero__title {
@@ -125,6 +119,7 @@ body {
 
 .hero__lines {
   display: grid;
+  margin-top: clamp(1.25rem, 3.5vh, 2.5rem);
 }
 .hero__lines > .hero__line {
   grid-area: 1 / 1;
@@ -245,5 +240,120 @@ body {
   .hero__line--a,
   .hero__line--b {
     display: none;
+  }
+}
+
+.hero__logo {
+  flex: 0 0 auto;
+  width: clamp(3.5rem, 9vw, 7rem);
+  animation: title-in 900ms ease-out both;
+}
+
+.hero__nav-cue {
+  position: absolute;
+  top: 199vh;
+  left: 0;
+  width: 1px;
+  height: 1px;
+  pointer-events: none;
+}
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 1rem clamp(0.75rem, 4vw, 2rem);
+  opacity: 0;
+  translate: 0 -0.5rem;
+  pointer-events: none;
+  transition:
+    opacity 450ms ease,
+    translate 450ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.site-nav.is-revealed {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.site-nav.is-revealed > * {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav {
+    transition: none;
+  }
+}
+
+.page {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: 8rem clamp(1rem, 5vw, 3rem) 6rem;
+  min-height: 100vh;
+}
+
+.page__title {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 6vw, 3.25rem);
+}
+
+.page__lead {
+  margin: 0;
+  color: #b6c2d1;
+  font-size: 1.05rem;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: clamp(1.25rem, 4vh, 2.5rem);
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  color: rgba(232, 238, 246, 0.45);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: scroll-cue-in 600ms ease both;
+}
+
+.hero__scroll-cue svg {
+  display: block;
+  animation: scroll-cue-bounce 2s infinite ease-in-out;
+}
+
+@keyframes scroll-cue-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes scroll-cue-bounce {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-cue,
+  .hero__scroll-cue svg {
+    animation: none;
   }
 }

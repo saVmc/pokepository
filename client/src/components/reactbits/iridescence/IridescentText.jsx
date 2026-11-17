@@ -5,8 +5,6 @@ import { useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Iridescence from "./Iridescence";
 import "./IridescentText.css";
 
-// Mirrors StrokeText's padding so both components produce the same viewBox for
-// the same text, which is what keeps the two title layers aligned.
 const PAD_RATIO = 0.1;
 
 export default function IridescentText({
@@ -24,8 +22,6 @@ export default function IridescentText({
 
   const maskId = `iridescent-text-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
 
-  // StrokeText emits one <tspan> per character, which suppresses kerning pairs.
-  // Splitting the same way is what makes the two layers measure identically.
   const characters = useMemo(() => Array.from(String(text ?? "")), [text]);
 
   const fontStyle = {
@@ -68,7 +64,6 @@ export default function IridescentText({
     };
 
     measure();
-    // The custom font changes the glyph metrics, so measure again once it lands.
     document.fonts?.ready.then(measure).catch(() => {});
 
     return () => {
@@ -87,7 +82,6 @@ export default function IridescentText({
       role="img"
       aria-label={text}
     >
-      {/* Off-layout copy used only to read the text's bounding box. */}
       <svg className="iridescent-text__measure" aria-hidden="true">
         <text ref={measureRef} x="0" y="0" style={fontStyle}>
           {characters.map((char, index) => (

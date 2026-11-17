@@ -14,7 +14,7 @@ export default function IridescentLogo() {
         maskSize: "100% 100%",
       }}
     >
-      <Iridescence color="#8b769f" speed={0.5} />
+      <Iridescence color="#8b769f" speed={0.5} scale={2} />
     </div>
   );
 }
