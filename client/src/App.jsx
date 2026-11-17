@@ -51,10 +51,10 @@ const SHOWCASE_CARDS = [
     subtitle: "Paldean Fates",
   },
   {
-    src: tcgdex("SV/SV8", "033", "jp"),
-    alt: "Pikachu ex",
-    title: "Pikachu ex",
-    subtitle: "Vivid Voltage",
+    src: tcgdex("sv/sv03.5", "181"),
+    alt: "Dragonair",
+    title: "Dragonair",
+    subtitle: "151",
   },
   {
     src: tcgdex("ex/ex3", "97"),
@@ -169,17 +169,19 @@ function App() {
               <p className="hero__line hero__line--b">
                 Every card you own, now in one place :D
               </p>
-              <p className="hero__line hero__line--c">Coming soon...</p>
+              <p className="hero__line hero__line--c">
+                Try it today, no login required.
+              </p>
             </div>
             <div className="hero__cta">
               <SpecularButton
                 size="lg"
                 radius={18}
-                tint="#14e6dd"
+                tint="#7de7e2"
                 tintOpacity={0.06}
                 textColor="#f5f5f5"
-                lineColor="#14e6dd"
-                baseColor="#2a3a4a"
+                lineColor="#c47ddd"
+                baseColor="#637383"
                 proximity={260}
               >
                 Get Started
