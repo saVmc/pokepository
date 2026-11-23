@@ -27,15 +27,33 @@ export function displayName(name) {
     .join(" ");
 }
 
+let listPromise = null;
 let namesPromise = null;
+
+function speciesList() {
+  if (!listPromise) {
+    listPromise = getSpecies().catch((cause) => {
+      listPromise = null;
+      throw cause;
+    });
+  }
+  return listPromise;
+}
 
 function nameIndex() {
   if (!namesPromise) {
-    namesPromise = getSpecies().then(
+    namesPromise = speciesList().then(
       (list) => new Map(list.map((entry) => [entry.name, entry.dexId])),
     );
   }
   return namesPromise;
+}
+
+export async function speciesName(dexId) {
+  const wanted = Number(dexId);
+  const list = await speciesList();
+  const match = list.find((entry) => entry.dexId === wanted);
+  return match ? displayName(match.name) : null;
 }
 
 export async function dexIdFromCardName(cardName) {

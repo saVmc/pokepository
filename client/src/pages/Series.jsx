@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
-import BackLink from "../components/other/BackLink";
+import Breadcrumb from "../components/other/Breadcrumb";
 
 import { getSeries, assetUrl, assetFallback } from "../api/tcgdex";
 
@@ -26,7 +26,16 @@ export default function Series() {
 
   return (
     <main className="page">
-      <BackLink to="/browse">All eras</BackLink>
+      <Breadcrumb
+        items={[
+          { label: "Browse", to: "/browse" },
+          {
+            label: `${series?.name ?? id} era`,
+            image: series?.logo ? assetUrl(series.logo) : null,
+            onImageError: series?.logo ? assetFallback(series.logo) : undefined,
+          },
+        ]}
+      />
 
       {current.status === "loading" && (
         <p className="page__lead">Loading {id}…</p>

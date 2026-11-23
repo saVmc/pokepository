@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import CardArtGrid from "../components/other/CardArtGrid";
 import EraFilter from "../components/other/EraFilter";
-import BackLink from "../components/other/BackLink";
+import Breadcrumb from "../components/other/Breadcrumb";
 import { getDex, getExcludedSetIds, setIdOf, eraIdOf } from "../api/tcgdex";
 import { artworkUrl, displayName } from "../api/pokeapi";
 
@@ -44,7 +44,12 @@ export default function Pokemon() {
 
   return (
     <main className="page">
-      <BackLink to="/browse">All Pokémon</BackLink>
+      <Breadcrumb
+        items={[
+          { label: "Browse", to: "/browse" },
+          { label: species, image: artworkUrl(dexId) },
+        ]}
+      />
 
       {current.status === "loading" && (
         <p className="page__lead">Loading Pokédex #{dexId}…</p>

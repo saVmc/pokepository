@@ -1,12 +1,89 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-import BackLink from "./BackLink";
+import Breadcrumb from "./Breadcrumb";
 import { TypeBadge, StageBadge, RetreatCost } from "./CardSymbols";
 import HoloCard from "../reactbits/holocard/HoloCard";
 import { getCard, cardImage, assetUrl, assetFallback } from "../../api/tcgdex";
-import { artworkUrl, dexIdFromCardName } from "../../api/pokeapi";
+import { artworkUrl, dexIdFromCardName, speciesName } from "../../api/pokeapi";
 import "./other.css";
+
+const FOILS = {
+  none: { intensity: 0, edgeSparkle: 0, glare: 0 },
+  holo: {
+    preset: "rainbow",
+    intensity: 0.45,
+    edgeSparkle: 0.3,
+    glare: 0.12,
+    scale: 1,
+  },
+  illustration: {
+    preset: "glitter",
+    intensity: 0.3,
+    edgeSparkle: 0.22,
+    glare: 0.1,
+    scale: 1.4,
+  },
+  ultra: {
+    preset: "shards",
+    intensity: 0.8,
+    edgeSparkle: 0.7,
+    glare: 0.18,
+    scale: 1.1,
+  },
+  gold: {
+    preset: "gold",
+    intensity: 0.95,
+    edgeSparkle: 0.9,
+    glare: 0.26,
+    foilColor: "#ffd76a",
+    scale: 1.2,
+  },
+};
+
+const RARITY_FOIL = {
+  "ACE SPEC Rare": "holo",
+  "Amazing Rare": "holo",
+  "Classic Collection": "holo",
+  "Double rare": "holo",
+  "Holo Rare": "holo",
+  "Holo Rare V": "holo",
+  "Holo Rare VMAX": "holo",
+  "Holo Rare VSTAR": "holo",
+  LEGEND: "holo",
+  "Radiant Rare": "holo",
+  "Rare Holo": "holo",
+  "Rare Holo LV.X": "holo",
+  "Rare PRIME": "holo",
+  "Illustration rare": "illustration",
+  "Black White Rare": "ultra",
+  "Full Art Trainer": "ultra",
+  "Futuristic Rare": "ultra",
+  "Mega Attack Rare": "ultra",
+  "One Shiny": "ultra",
+  "One Star": "ultra",
+  "Pikachu Rare": "ultra",
+  "RGB Rare": "ultra",
+  "Shiny Ultra Rare": "ultra",
+  "Shiny rare": "ultra",
+  "Shiny rare V": "ultra",
+  "Shiny rare VMAX": "ultra",
+  "Special illustration rare": "ultra",
+  "Three Star": "ultra",
+  "Two Shiny": "ultra",
+  "Two Star": "ultra",
+  "Ultra Rare": "ultra",
+  Crown: "gold",
+  "Hyper rare": "gold",
+  "Mega Hyper Rare": "gold",
+  "Secret Rare": "gold",
+};
+
+function foilFor(card) {
+  const tier =
+    RARITY_FOIL[card.rarity] ?? (card.variants?.holo ? "holo" : "none");
+  return FOILS[tier];
+}
 
 function Row({ label, value }) {
   if (value === undefined || value === null || value === "") return null;
@@ -23,6 +100,7 @@ export default function CardStats({ id }) {
   const [status, setStatus] = useState("loading");
   const [error, setError] = useState("");
   const [evolve, setEvolve] = useState(null);
+  const [species, setSpecies] = useState(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -55,6 +133,22 @@ export default function CardStats({ id }) {
   const evolveDex =
     evolveFrom && evolve?.name === evolveFrom ? evolve.dexId : null;
 
+  const dexId = card?.dexId?.[0];
+
+  useEffect(() => {
+    if (!dexId) return undefined;
+    let active = true;
+    speciesName(dexId).then((name) => {
+      if (active) setSpecies({ dexId, name });
+    });
+    return () => {
+      active = false;
+    };
+  }, [dexId]);
+
+  const speciesLabel =
+    dexId && species?.dexId === dexId ? species.name : dexId ? `#${dexId}` : null;
+
   if (status === "loading") return <p className="page__lead">Loading {id}…</p>;
   if (status === "error")
     return (
@@ -68,9 +162,29 @@ export default function CardStats({ id }) {
 
   return (
     <>
-      <BackLink to={card.set?.id ? `/set/${card.set.id}` : "/browse"}>
-        {card.set?.name ?? "Browse"}
-      </BackLink>
+      <Breadcrumb
+        items={[
+          { label: "Browse", to: "/browse" },
+          dexId
+            ? {
+                label: speciesLabel,
+                to: `/pokemon/${dexId}`,
+                image: artworkUrl(dexId),
+              }
+            : null,
+          card.set?.id
+            ? {
+                label: card.set.name,
+                to: `/set/${card.set.id}`,
+                image: card.set.logo ? assetUrl(card.set.logo) : null,
+                onImageError: card.set.logo
+                  ? assetFallback(card.set.logo)
+                  : undefined,
+              }
+            : null,
+          { label: card.localId ? `${card.name} · ${card.localId}` : card.name },
+        ]}
+      />
 
       <div className="card-stats">
         <div>
@@ -79,8 +193,8 @@ export default function CardStats({ id }) {
               <HoloCard
                 image={art}
                 alt={card.name}
-                preset="rainbow"
                 width={320}
+                {...foilFor(card)}
               />
             </div>
           ) : (

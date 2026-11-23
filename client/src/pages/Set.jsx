@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import BackLink from "../components/other/BackLink";
+import Breadcrumb from "../components/other/Breadcrumb";
 
 import CardArtGrid from "../components/other/CardArtGrid";
 import { getSet, assetUrl, assetFallback } from "../api/tcgdex";
@@ -26,9 +26,22 @@ export default function Set() {
 
   return (
     <main className="page">
-      <BackLink to={set?.serie?.id ? `/series/${set.serie.id}` : "/browse"}>
-        {set?.serie?.name ? `${set.serie.name} era` : "Browse"}
-      </BackLink>
+      <Breadcrumb
+        items={[
+          { label: "Browse", to: "/browse" },
+          set?.serie?.id
+            ? {
+                label: `${set.serie.name} era`,
+                to: `/series/${set.serie.id}`,
+              }
+            : null,
+          {
+            label: set?.name ?? id,
+            image: set?.logo ? assetUrl(set.logo) : null,
+            onImageError: set?.logo ? assetFallback(set.logo) : undefined,
+          },
+        ]}
+      />
 
       {current.status === "loading" && (
         <p className="page__lead">Loading {id}…</p>
