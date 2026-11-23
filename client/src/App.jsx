@@ -4,6 +4,10 @@ import Particles from "./components/reactbits/particles/Particles";
 import SiteNav from "./components/SiteNav";
 import Home from "./pages/Home";
 import Browse from "./pages/Browse";
+import Card from "./pages/Card";
+import Set from "./pages/Set";
+import Series from "./pages/Series";
+import Pokemon from "./pages/Pokemon";
 
 const DRAW = 1.4;
 const FILL_DELAY = 0.2;
@@ -82,6 +86,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home introSeen={introSeen} />} />
         <Route path="/browse" element={<Browse />} />
+        <Route path="/card/:id" element={<Card />} />
+        <Route path="/set/:id" element={<Set />} />
+        <Route path="/series/:id" element={<Series />} />
+        <Route path="/pokemon/:dexId" element={<Pokemon />} />
       </Routes>
     </BrowserRouter>
   );

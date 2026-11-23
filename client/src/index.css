@@ -1,4 +1,15 @@
 :root {
+  --bg: #04090f;
+  --ink: #e8eef6;
+  --muted: #bab2c9;
+  --iri: #8b769f;
+  --iri-bright: #c9a7e4;
+  --iri-deep: #a35ecf;
+  --line: rgba(163, 94, 207, 0.2);
+  --line-strong: rgba(163, 94, 207, 0.45);
+}
+
+:root {
   --bs-body-font-family: "Pokepository Display", system-ui, sans-serif;
 }
 
@@ -356,4 +367,15 @@ body {
   .hero__scroll-cue svg {
     animation: none;
   }
+}
+
+a {
+  color: var(--iri-bright);
+  text-decoration-color: var(--line-strong);
+  text-underline-offset: 0.2em;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--ink);
 }

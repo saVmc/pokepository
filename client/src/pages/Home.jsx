@@ -177,11 +177,11 @@ export default function Home({ introSeen = false }) {
             <SpecularButton
               size="lg"
               radius={18}
-              tint="#7de7e2"
+              tint="#a35ecf"
               tintOpacity={0.06}
               textColor="#f5f5f5"
               lineColor="#c47ddd"
-              baseColor="#637383"
+              baseColor="#5b4b6b"
               proximity={260}
               onClick={() => navigate("/browse")}
             >
