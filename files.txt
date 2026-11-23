@@ -1,0 +1,7 @@
+database/schema.sql
+database/my_queries.sql
+client/public/manifest.json
+client/public/serviceworker.js
+scripts/seed-database.js
+server/index.js
+README.md

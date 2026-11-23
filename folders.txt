@@ -1,0 +1,10 @@
+client/src/api
+client/src/components/other
+client/src/components/reactbits
+client/src/pages
+client/public
+database
+client/public/icons
+scripts
+server
+working-documents
