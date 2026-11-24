@@ -4,8 +4,11 @@
   "description": "An intuitive Pokemon TCG collection tracker.",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "seed": "node scripts/seed-database.js",
+    "seed:schema": "node scripts/seed-database.js --schema-only",
+    "seed:dex": "node scripts/seed-database.js --dex",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Farley Hammond",
